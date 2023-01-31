@@ -5,14 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientService {
-    public static void main(String[] args) {
-        ClientService clientService = new ClientService();
-        System.out.println(clientService.create("Alex Mikulin"));
-        System.out.println(clientService.getById(101));
-        clientService.setName(104, "Yakov Kovalyov");
-        clientService.deleteById(104);
-        System.out.println(clientService.listAll());
-    }
 
     public long create(String name) {
         long id = -1;
