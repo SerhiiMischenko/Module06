@@ -18,6 +18,13 @@ public class ClientService {
         long id = -1;
         ResultSet resultSet;
         Database database = Database.getInstance();
+        if(name.length() > 100 || name.isBlank() ||name.isEmpty()){
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         try (Connection conn = database.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO `mydb`.`client` (`name`) VALUES (?)")) {
             preparedStatement.setString(1, name);
@@ -27,7 +34,7 @@ public class ClientService {
                 id = resultSet.getLong("id");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Wrong data input");
         }
         return id;
     }
@@ -35,6 +42,13 @@ public class ClientService {
     public String getById(long id) {
         String name = "";
         ResultSet resultSet;
+        if(id < 0) {
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                System.out.println("Wrong data input");
+            }
+        }
         Database database = Database.getInstance();
         try (Connection conn = database.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM mydb.client where id = ?")) {
@@ -51,6 +65,20 @@ public class ClientService {
     }
 
     public void setName(long id, String name) {
+        if(id < 0) {
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                System.out.println("Wrong data input");
+            }
+        }
+        if(name.length() > 100 || name.isBlank() ||name.isEmpty()){
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         Database database = Database.getInstance();
         try (Connection conn = database.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(
@@ -64,6 +92,13 @@ public class ClientService {
     }
 
    public void deleteById(long id) {
+       if(id < 0) {
+           try {
+               throw new Exception();
+           } catch (Exception e) {
+               System.out.println("Wrong data input");
+           }
+       }
        Database database = Database.getInstance();
        try (Connection conn = database.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(
