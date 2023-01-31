@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,17 +38,5 @@ public class Database {
             throw new RuntimeException(e);
         }
         return conn;
-    }
-
-    public String sqlResponseReader(String sqlResponse) {
-        StringBuilder response = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(sqlResponse))){
-            while (bufferedReader.ready()) {
-                response.append(bufferedReader.readLine());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return response.toString();
     }
 }
